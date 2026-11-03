@@ -1,0 +1,23 @@
+{
+  "task": "OfflineCarGoal1Gymnasium-v0",
+  "reward_scale": 0.1,
+  "cost_scale": 1.0,
+  "actor_lr": 0.001,
+  "critic_lr": 0.001,
+  "vae_lr": 0.001,
+  "phi": 0.05,
+  "lmbda": 0.75,
+  "beta": 0.5,
+  "cost_limit": 10,
+  "episode_len": 1000,
+  "batch_size": 512,
+  "a_hidden_sizes": [256, 256],
+  "c_hidden_sizes": [256, 256],
+  "vae_hidden_sizes": 400,
+  "sample_action_num": 10,
+  "gamma": 0.99,
+  "tau": 0.005,
+  "num_q": 2,
+  "num_qc": 2,
+  "PID": [0.1, 0.003, 0.001]
+}

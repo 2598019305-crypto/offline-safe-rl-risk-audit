@@ -1,0 +1,11 @@
+{
+  "python": "3.9.25",
+  "torch": "2.2.2+cu121",
+  "gymnasium": "0.28.1",
+  "safety_gymnasium": "0.4.0",
+  "dsrl": "0.1.0",
+  "osrl_commit": "03a4586463690566ec8d7830ca4027b46d4ad02f",
+  "cuda_runtime_used_by_slurm": "12.1",
+  "gpu_partition": "G4 / RTX 4090",
+  "slurm_memory_request": "64G per single-GPU job"
+}

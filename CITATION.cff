@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "Cite the version-specific archival record when using this repository."
+title: "Offline Safe RL Risk Audit"
+type: software
+authors:
+  - name: "Offline Safe RL Risk Audit Authors"
+repository-code: "https://github.com/2598019305-crypto/offline-safe-rl-risk-audit"
+url: "https://github.com/2598019305-crypto/offline-safe-rl-risk-audit"
+license: Apache-2.0
+version: "0.1.0"
+date-released: "2026-11-03"
+abstract: "Code for diagnosing risk-penalization actionability in offline safe reinforcement learning."
+keywords:
+  - offline reinforcement learning
+  - safe reinforcement learning
+  - risk assessment
+  - candidate feasibility
+  - closed-loop evaluation

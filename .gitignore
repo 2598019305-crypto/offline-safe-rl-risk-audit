@@ -1,0 +1,38 @@
+.venv/
+__pycache__/
+*.py[cod]
+*.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Large data and model artifacts are distributed through the dataset DOI.
+data/
+artifacts/
+outputs/
+checkpoints/
+*.hdf5
+*.h5
+*.npz
+*.npy
+*.pt
+*.pth
+
+# Local experiment outputs and logs.
+每日结果/
+论文核验输出_*/
+*.out
+*.err
+*.log
+
+# Credentials and editor state.
+.env
+.env.*
+*.pem
+*.key
+storage_state.json
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+_quarantine/

@@ -1,0 +1,7 @@
+Offline Safe RL Risk Audit
+Copyright 2026 The Authors
+
+This repository contains code derived from OSRL commit
+03a4586463690566ec8d7830ca4027b46d4ad02f.
+OSRL is distributed under the Apache License, Version 2.0.
+The retained license text is in third_party/osrl/LICENSE.
