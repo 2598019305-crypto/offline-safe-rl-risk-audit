@@ -201,6 +201,28 @@ The ablation entry point is `src/bcql/train_bcql_ablation.py`. A6 uses
 `--variant A6`; A0-A5 provide the single-factor controls described in the
 paper.
 
+To reproduce the five-seed paired analysis from the released evaluation JSON
+files, arrange the constrained and `--disable-cost` files as
+`<seed>_evaluation_100.json` and `<seed>_control_evaluation_100.json`, and the
+A6 files as `<a6-root>/<seed>/evaluation_100.json`. Then run:
+
+```bash
+python src/bcql/analyze_causal_intervention.py \
+  --original-root /path/to/constrained-and-control-evaluations \
+  --a6-root /path/to/a6-evaluations \
+  --output-dir /path/to/analysis \
+  --bootstrap-reps 20000 \
+  --bootstrap-seed 20261031 \
+  --seeds 20261216 20261217 20261218 20261219 20261220
+```
+
+The inference treats training seeds as the upper sampling unit and nests the
+100 paired evaluation episodes within each training seed. It never treats all
+500 episodes as independent training runs. The archived five-seed run gives
+an A6-minus-constrained mean-cost difference of `-11.20` (95% paired cluster
+bootstrap CI `[-15.80, -6.18]`) and a CVaR@25 difference of `-22.40`
+(`[-34.76, -9.11]`).
+
 ## Reproduction scope
 
 The archived files make it possible to:
