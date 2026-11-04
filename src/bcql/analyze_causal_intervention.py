@@ -211,10 +211,14 @@ def hierarchical_bootstrap(
     return summary, draws
 
 
-def plot_training(a6_root: Path, output: Path) -> list[dict]:
+def plot_training(
+    a6_root: Path,
+    output: Path,
+    training_seeds: list[int],
+) -> list[dict]:
     history_rows = []
     fig, axes = plt.subplots(1, 2, figsize=(11, 4.2))
-    for seed in (20261216, 20261217, 20261218):
+    for seed in training_seeds:
         rows = json.loads((a6_root / str(seed) / "l1_history.json").read_text())
         for row in rows:
             history_rows.append({"training_seed": seed, **row})
@@ -302,12 +306,18 @@ def main() -> None:
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--bootstrap-reps", type=int, default=10000)
     parser.add_argument("--bootstrap-seed", type=int, default=20261031)
+    parser.add_argument(
+        "--seeds",
+        type=int,
+        nargs="+",
+        default=[20261216, 20261217, 20261218],
+    )
     args = parser.parse_args()
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
     by_arm_seed: dict[tuple[str, int], list[dict]] = {}
     source_files = {}
-    for seed in (20261216, 20261217, 20261218):
+    for seed in args.seeds:
         constrained_path = args.original_root / f"{seed}_evaluation_100.json"
         lambda0_path = args.original_root / f"{seed}_control_evaluation_100.json"
         a6_path = args.a6_root / str(seed) / "evaluation_100.json"
@@ -369,7 +379,7 @@ def main() -> None:
         ("a6", "lambda0", "A6_minus_lambda0"),
         ("constrained", "lambda0", "BCQ-Lag_minus_lambda0"),
     ):
-        for seed in (20261216, 20261217, 20261218):
+        for seed in args.seeds:
             row = {
                 "comparison": pair_name,
                 "training_seed": seed,
@@ -423,7 +433,7 @@ def main() -> None:
         ["comparison", "metric", "estimate", "ci95_low", "ci95_high"],
     )
 
-    history_rows = plot_training(args.a6_root, args.output_dir)
+    history_rows = plot_training(args.a6_root, args.output_dir, args.seeds)
     write_csv(
         args.output_dir / "A6_training_history_long.csv",
         history_rows,
@@ -436,7 +446,7 @@ def main() -> None:
         "protocol": {
             "evaluation_seeds": [149000, 149099],
             "episodes_per_model": 100,
-            "training_seeds": [20261216, 20261217, 20261218],
+            "training_seeds": args.seeds,
             "safe_definition": "raw cumulative episode cost <= 10",
             "cvar25_definition": "mean of highest ceil(25%) episode costs",
             "bootstrap": (
